@@ -199,6 +199,8 @@ def train(batch_size, spatial_epochs, temporal_epochs, train_id, list_dB, spatia
 	########### Training Process ############
 
 	for sub in range(subjects):
+		print("Init Adam")
+        	adam = optimizers.Adam(lr=0.00001, decay=0.000001)
 		print(".starting subject" + str(sub))
 		gpu_observer()
 		spatial_weights_name = root_db_path + 'Weights/'+ str(train_id) + '/vgg_spatial_'+ str(train_id) + '_' + str(dB) + '_'
@@ -459,6 +461,7 @@ def train(batch_size, spatial_epochs, temporal_epochs, train_id, list_dB, spatia
 		elif channel_flag == 4:
 			del Train_X_Strain, Test_X_Strain, Train_Y_Strain, Train_Y_Strain, Train_X_Gray, Test_X_Gray, Train_Y_Gray, Test_Y_Gray
 			del vgg_model_gray, vgg_model_strain, model_gray, model_strain
-		
+		#keras clear session
+       		K.clear_session()
 		gc.collect()
 		###################################################
